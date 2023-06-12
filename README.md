@@ -197,3 +197,4 @@ sudo docker logs --tail 50 --follow --timestamps <your_container_name>
 _Документация: Примеры обращений к эндпоинтам находятся по адресу:_
 
 *http://fooodgram.hopto.org/api/docs/*
+
