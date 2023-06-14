@@ -65,7 +65,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            sudo docker-compose stop
+            sudo docker-compose stop nginx
             sudo docker-compose rm backend
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram_frontend:latest
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram_backend:latest
@@ -92,4 +92,3 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: ${{ github.workflow }} успешно выполнен!
-          
