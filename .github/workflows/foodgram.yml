@@ -43,7 +43,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/foodgram_frontend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/foodgram_frontend:v1
 
       - name: Push backend to Docker Hub
         uses: docker/build-push-action@v3
@@ -51,7 +51,7 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/foodgram_backend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/foodgram_backend:v1
   
   deploy:
     runs-on: ubuntu-latest
@@ -65,8 +65,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram_frontend:latest
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram_backend:latest
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram_frontend
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram_backend
             sudo docker-compose stop
             sudo docker-compose rm backend
             touch .env
@@ -95,4 +95,3 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: ${{ github.workflow }} успешно выполнен!
-          
