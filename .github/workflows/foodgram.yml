@@ -43,7 +43,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/foodgram_frontend:v1
+          tags: ${{ secrets.DOCKER_USERNAME }}/foodgram_frontend:latest
 
       - name: Push backend to Docker Hub
         uses: docker/build-push-action@v3
@@ -51,7 +51,7 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/foodgram_backend:v1
+          tags: ${{ secrets.DOCKER_USERNAME }}/foodgram_backend:latest
   
   deploy:
     runs-on: ubuntu-latest
