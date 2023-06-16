@@ -3,7 +3,7 @@
 Сайт Foodgram, «Продуктовый помощник».
 Онлайн-сервис и API для него. На этом сервисе пользователи после регистрации могут публиковать рецепты, подписываться на публикации других пользователей, добавлять понравившиеся рецепты в список «Избранное», а перед походом в магазин скачивать сводный список продуктов, необходимых для приготовления одного или нескольких выбранных блюд.
 
-![example workflow](https://github.com/baciroff/foodgram-project-react/actions/workflows/foodgram.yml/badge.svg)
+![example workflow](https://github.com/baciroff/foodgram-project-react/.github/workflows/foodgram.yml/badge.svg)
 
 ## Используемые технологии:
 
