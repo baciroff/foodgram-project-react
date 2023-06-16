@@ -12,6 +12,7 @@ services:
     image: baciroff/foodgram_backend:latest
     restart: always
     volumes:
+      - data_value:/app/data
       - static_value:/app/static/
       - media_value:/app/media/
     depends_on:
@@ -23,8 +24,6 @@ services:
     image: baciroff/foodgram_frontend:latest
     volumes:
       - ../frontend/:/app/result_build/
-    depends_on:
-      - backend
 
   nginx:
     image: nginx:1.19.3
@@ -36,9 +35,9 @@ services:
       - ../docs/:/usr/share/nginx/html/api/docs/
       - static_value:/var/html/static/
       - media_value:/var/html/media/
+      - data_value:/var/html/data
     depends_on:
       - backend
-      - frontend
 
 volumes:
   postgres_data:
