@@ -69,8 +69,7 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             sudo docker-compose stop
-            sudo docker image rm ${{ secrets.DOCKER_USERNAME }}/foodgram_backend:latest
-            sudo docker image rm ${{ secrets.DOCKER_USERNAME }}/foodgram_frontend:latest
+            sudo docker image rm backend frontend
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram_backend:latest
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram_frontend:letest
             touch .env
@@ -100,4 +99,3 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: ${{ github.workflow }} успешно выполнен!
-          
