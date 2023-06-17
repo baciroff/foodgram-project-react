@@ -1,6 +1,6 @@
-[![foodgram_workflow](https://github.com/baciroff/foodgram-project-react/actions/workflows/foodgram.yml/badge.svg)](https://github.com/baciroff/foodgram-project-react/actions/workflows/foodgram.yml)
-
 # "Продуктовый помощник" (Foodgram)
+
+[![foodgram_workflow](https://github.com/baciroff/foodgram-project-react/actions/workflows/foodgram.yml/badge.svg)](https://github.com/baciroff/foodgram-project-react/actions/workflows/foodgram.yml)
 
 ## Аминистратор
 
