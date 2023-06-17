@@ -190,7 +190,7 @@ docker-compose exec backend python manage.py createsuperuser
 docker-compose exec backend python manage.py collectstatic --no-input
 ```
 
-Теперь доступность проекта можно проверить по адресу [http://localhost/](http://localhost/)
+Теперь доступность проекта можно проверить по адресу [http://fooodgram.hopto.org/](http://fooodgram.hopto.org/)
 
 ---
 
@@ -200,7 +200,8 @@ docker-compose exec backend python manage.py collectstatic --no-input
 Заполнить базу данных ингредиентами можно выполнив следующую команду из папки "./infra/":
 
 ```bash
-docker-compose exec backend python manage.py fill_ingredients_from_csv --path data/
+docker-compose exec backend python manage.py loader
+docker-compose exec backend python manage.py load_tags
 ```
 
 Также необходимо заполнить базу данных тегами (или другими данными).  
