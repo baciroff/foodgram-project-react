@@ -190,7 +190,7 @@ docker-compose exec backend python manage.py createsuperuser
 docker-compose exec backend python manage.py collectstatic --no-input
 ```
 
-Теперь доступность проекта можно проверить по адресу [http://fooodgram.hopto.org/](http://fooodgram.hopto.org/)
+Теперь доступность проекта можно проверить по адресу [http://localhost/](http://localhost/)
 
 ---
 
@@ -205,7 +205,7 @@ docker-compose exec backend python manage.py load_tags
 ```
 
 Также необходимо заполнить базу данных тегами (или другими данными).  
-Для этого требуется войти в [админ-зону]<http://fooodgram.hopto.org/admin/>
+Для этого требуется войти в [админ-зону]<http://localhost/admin/>
 проекта под логином и паролем администратора (пользователя, созданного командой createsuperuser).
 
 ---
@@ -223,3 +223,4 @@ API фреймворк: Django REST (контейнер backend)
 Веб-сервер nginx перенаправляет запросы клиентов к контейнерам frontend и backend, либо к хранилищам (volume) статики и файлов.  
 Контейнер nginx взаимодействует с контейнером backend через gunicorn.  
 Контейнер frontend взаимодействует с контейнером backend посредством API-запросов.
+  
