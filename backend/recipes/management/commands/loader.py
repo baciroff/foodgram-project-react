@@ -9,8 +9,8 @@ ALREADY_LOADED_ERROR_MESSAGE = 'В базе уже есть данные.'
 
 
 class Command(BaseCommand):
-    """Для загрузки данных (ингредиентов) в базу"""
-
+    """Для загрузки данных (иннгредиентов) в базу."""
+    help = 'Загрузка из json файла'
     def handle(self, *args, **kwargs):
         if Ingredient.objects.exists():
             print(ALREADY_LOADED_ERROR_MESSAGE)
@@ -18,15 +18,15 @@ class Command(BaseCommand):
         try:
             with open(f'{settings.BASE_DIR}/data/ingredients.json', 'rb') as f:
                 data = json.load(f)
+
                 for value in data:
                     ingredient = Ingredient()
                     ingredient.name = value['name']
-                    ingredient.measurement_unit = value
-                    ['measument_unit']
+                    ingredient.measurement_unit = value['measurement_unit']
                     ingredient.save()
         except ValueError:
-            print('Неизвестное значение.')
+            print('Неопределенное значение.')
         except Exception:
             print('Что-то пошло не так!')
         else:
-            print('Загрузка завершена.')
+            print('Загрузка окончена.')

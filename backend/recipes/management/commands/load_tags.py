@@ -1,5 +1,4 @@
 from django.core.management import BaseCommand
-
 from recipes.models import Tag
 
 
@@ -18,8 +17,8 @@ class Command(BaseCommand):
         try:
             Tag.objects.bulk_create(Tag(**tag) for tag in data)
         except ValueError:
-            print('Неизвестное значение.')
+            print('Неопределенное значение.')
         except Exception:
             print('Что-то пошло не так!')
         else:
-            print('Создание тегов завершено.')
+            print('Создание тегов окончено.')
