@@ -11,7 +11,7 @@ ALREADY_LOADED_ERROR_MESSAGE = 'В базе уже есть данные.'
 class Command(BaseCommand):
     """Для загрузки данных (иннгредиентов) в базу."""
     help = 'Загрузка из json файла'
-    
+
     def handle(self, *args, **kwargs):
         if Ingredient.objects.exists():
             print(ALREADY_LOADED_ERROR_MESSAGE)
