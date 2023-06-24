@@ -1,39 +1,76 @@
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import RegexValidator
 from django.db import models
+
+from users.validators import validate_username
 
 
 class User(AbstractUser):
-    username = models.CharField(
-        max_length=150,
-        unique=True,
-        db_index=True,
-        blank=False,
-        verbose_name='Логин',
-        help_text='Введите логин',
-        validators=[RegexValidator(regex=r'[\w.@+=]+\Z',)])
     email = models.EmailField(
-        max_length=256,
+        'Электронная почта',
+        max_length=254,
         unique=True,
-        db_index=True,
-        verbose_name='Адрес электронной почты',
-        help_text='Введите электронную почту')
+        blank=False,
+        null=False,
+    )
+    username = models.CharField(
+        'Имя пользователя',
+        max_length=150,
+        unique=True,
+        blank=False,
+        null=False,
+        validators=[validate_username, ]
+    )
     first_name = models.CharField(
+        'Имя',
         max_length=150,
-        verbose_name='Имя',
-        help_text='Введите имя')
+        blank=False,
+        null=False,
+    )
     last_name = models.CharField(
+        'Фамилия',
         max_length=150,
-        verbose_name='Фамилия',
-        help_text='Введите фамилию')
-
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ('username', 'first_name', 'last_name',)
+        blank=False,
+        null=False
+    )
+    password = models.CharField(
+        'Пароль',
+        max_length=150,
+        blank=False,
+        null=False,
+    )
 
     class Meta:
-        ordering = ('-id',)
+        ordering = ['id']
         verbose_name = 'Пользователь'
         verbose_name_plural = 'Пользователи'
 
     def __str__(self):
         return self.username
+
+
+class Subscription(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='follower',
+        verbose_name='Пользователь',
+    )
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='following',
+        verbose_name='Автор',
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'author'],
+                name='unique_user_author'
+            )
+        ]
+        verbose_name = 'Подписка'
+        verbose_name_plural = 'Подписки'
+
+    def __str__(self):
+        return f'{self.user.username} подписан на {self.author.username}'
