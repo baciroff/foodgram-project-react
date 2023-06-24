@@ -71,10 +71,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram_frontend:latest
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram_backend:latest
-            sudo docker-compose stop
-            sudo docker-compose rm backend
+            
+            rm -f .env
             touch .env
             echo DB_ENGINE=${{ secrets.DB_ENGINE }} >> .env
             echo DB_NAME=${{ secrets.DB_NAME }} >> .env
@@ -84,8 +82,13 @@ jobs:
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
             echo SECRET_KEY="${{ secrets.SECRET_KEY }}" >> .env
             echo ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }} >> .env
+            
+            sudo docker-compose stop
+            sudo docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs sudo docker rm
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram_frontend:latest
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/foodgram_backend:latest
             sudo docker-compose up -d
-            sudo docker-compose exec -T backend python manage.py makemigrations
+            sudo docker image prune -a
             sudo docker-compose exec -T backend python manage.py migrate
             sudo docker-compose exec -T backend python manage.py collectstatic --no-input
             
