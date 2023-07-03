@@ -1,11 +1,12 @@
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv
 
 load_dotenv()
 
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY', 'default')
 
@@ -20,13 +21,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
+    'djoser',
     'rest_framework',
     'rest_framework.authtoken',
-    'djoser',
+    'api.apps.ApiConfig',
     'users.apps.UsersConfig',
     'recipes.apps.RecipesConfig',
-    'api.apps.ApiConfig',
-    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -114,6 +115,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
+
     'DEFAULT_PAGINATION_CLASS': 'api.pagination.PageLimitPagination',
     'PAGE_SIZE': 6,
 }
@@ -133,3 +135,5 @@ DJOSER = {
 }
 
 EMPTY_VALUE = '-пусто-'
+
+LIMIT = 3

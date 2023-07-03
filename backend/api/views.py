@@ -26,8 +26,7 @@ class UserSubscribeView(APIView):
         author = get_object_or_404(User, id=user_id)
         serializer = UserSubscribeSerializer(
             data={'user': request.user.id, 'author': author.id},
-            context={'request': request}
-        )
+            context={'request': request})
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -38,8 +37,7 @@ class UserSubscribeView(APIView):
                                            author=author).exists():
             return Response(
                 {'errors': 'Вы не подписаны на этого пользователя'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+                status=status.HTTP_400_BAD_REQUEST)
         Subscription.objects.get(user=request.user.id,
                                  author=user_id).delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
@@ -92,8 +90,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     @action(
         detail=True,
         methods=['post', 'delete'],
-        permission_classes=[IsAuthenticated, ]
-    )
+        permission_classes=[IsAuthenticated, ])
     def favorite(self, request, pk):
         """Работа с избранными рецептами.
         Удаление/добавление в избранное.
@@ -110,8 +107,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     @action(
         detail=True,
         methods=['post', 'delete'],
-        permission_classes=[IsAuthenticated, ]
-    )
+        permission_classes=[IsAuthenticated, ])
     def shopping_cart(self, request, pk):
         """Работа со списком покупок.
         Удаление/добавление в список покупок.
@@ -129,8 +125,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
     @action(
         detail=False,
         methods=['get'],
-        permission_classes=[IsAuthenticated, ]
-    )
+        permission_classes=[IsAuthenticated, ])
     def download_shopping_cart(self, request):
         """Отправка файла со списком покупок."""
         ingredients = RecipeIngredient.objects.filter(

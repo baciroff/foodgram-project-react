@@ -7,6 +7,7 @@ from recipes.models import (Favorite, Ingredient, Recipe, RecipeIngredient,
 from rest_framework import serializers
 from rest_framework.validators import UniqueTogetherValidator
 from users.models import Subscription, User
+from foodgram.settings import LIMIT
 
 
 class UserSignUpSerializer(UserCreateSerializer):
@@ -60,7 +61,7 @@ class UserSubscribeRepresentSerializer(UserGetSerializer):
         request = self.context.get('request')
         recipes_limit = None
         if request:
-            recipes_limit = request.query_params.get('recipes_limit')
+            recipes_limit = request.query_params.get('recipes_limit', LIMIT)
         recipes = obj.recipes.all()
         if recipes_limit:
             recipes = obj.recipes.all()[:int(recipes_limit)]

@@ -2,6 +2,9 @@
 
 [![foodgram_workflow](https://github.com/baciroff/foodgram-project-react/actions/workflows/foodgram.yml/badge.svg)](https://github.com/baciroff/foodgram-project-react/actions/workflows/foodgram.yml)
 
+
+- <http://51.250.5.151>
+
 ## Аминистратор
 
 - Имя пользователя - baciroff
