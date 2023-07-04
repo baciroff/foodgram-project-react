@@ -61,9 +61,7 @@ class UserSubscribeRepresentSerializer(UserGetSerializer):
         request = self.context.get('request')
         recipes_limit = request.query_params.get('recipes_limit',
                                                  settings.LIMIT)
-        recipes = obj.recipes.all()
-        if recipes_limit:
-            recipes = obj.recipes.all()[:int(recipes_limit)]
+        recipes = obj.recipes.all()[:int(recipes_limit)]
         return RecipeSmallSerializer(recipes, many=True,
                                      context={'request': request}).data
 
