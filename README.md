@@ -2,15 +2,6 @@
 
 [![foodgram_workflow](https://github.com/baciroff/foodgram-project-react/actions/workflows/foodgram.yml/badge.svg)](https://github.com/baciroff/foodgram-project-react/actions/workflows/foodgram.yml)
 
-
-- <http://51.250.5.151>
-
-## Аминистратор
-
-- Имя пользователя - baciroff
-- email - <baciroff.ruslan@yandex.ru>
-- Пароль - 3721932A
-
 ## 1. [Описание](#1)
 
 ## 2. [Установка Docker (на платформе Ubuntu)](#2)
